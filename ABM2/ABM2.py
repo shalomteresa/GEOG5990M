@@ -16,8 +16,8 @@ random.seed(0)
 
 
 #Initialise agents
-n_agents = 100
-n_moves = 3
+n_agents = 10
+n_moves = 0
 #Create a list to store agents
 agents = []
 for i in range(n_agents):
@@ -30,27 +30,25 @@ for i in range(n_agents):
     agents.append([x0, y0])
     agents.append([random.randint(0, 99), random.randint(0, 99)])
     
-
 print(agents)
 
 
-for j in range(n_moves):
-    # Move agents
-    for i in range(n_agents):
-        rn = random.random()
-        if rn < 0.5:
-            agents[i][0] = agents[i][0] + 1
-        else:
-            agents[i][0] = agents[i][0] - 1
-        rn = random.random()
-        if rn < 0.5:
-            agents[i][1] = agents[i][1] + 1
-        else:
-            agents[i][1] = agents[i][1] - 1
+for i in range(n_agents):
+    rn = random.random()
+    if rn < 0.5:
+        agents[i][0] = agents[i][0] + 1
+    else:
+        agents[i][0] = agents[i][0] - 1
+    rn = random.random()
+    if rn < 0.5:
+        agents[i][1] = agents[i][1] + 1
+    else:
+        agents[i][1] = agents[i][1] - 1
+        
+print(rn)
+    
 
 
-
-    print(agents)
 
 
 # Plot the agents
