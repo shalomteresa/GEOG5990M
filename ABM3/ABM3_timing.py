@@ -14,6 +14,17 @@ random.seed(0)
 #Create a list to store agents
 agents = []
 
+# Variables for constraining movement.
+# The minimum x coordinate.
+x_min = 0
+# The minimum y coordinate.
+y_min = 0
+# The maximum x coordinate.
+x_max =99
+# The maximum y coordinate.
+y_max =99
+
+
 # Calculate the Euclidean distance between (x0, y0) and (x1, y1) using functions
 #Setting variables of coordinates
 x0 = 0
@@ -102,29 +113,40 @@ def get_min_and_max_distance():
 # A list to store times
 run_times = []
 n_agents_range = range(100, 101, 5)
-for n_agents in n_agents_range:
-    
-    # Initialise agents
-    agents = []
-    for i in range(n_agents):
-        agents.append([random.randint(0, 99), random.randint(0, 99)])
-    #print(agents)
-    
-    # Print the maximum distance between all the agents
-    start = time.perf_counter()
-    #print("Maximum distance between all the agents", get_max_distance())
-    #print("Minimum distance between all the agents", get_min_distance())
-    min_distance, max_distance, average = get_min_and_max_distance()
-    print("Maximum distance between all the agents", max_distance)
-    print("Minimum distance between all the agents", min_distance)
-    print("Average distance between all the agents", average)
-    end = time.perf_counter()
-    run_time = end - start
-    print("Time taken to calculate maximum distance", run_time)
-    run_times.append(run_time)
+n_moves = 100
+for n_moves in range(n_moves):
+    for n_agents in n_agents_range:
+        
+        # Initialise agents
+        agents = []
+        for i in range(n_agents):
+            agents.append([random.randint(0, 99), random.randint(0, 99)])
+        #print(agents)
+        # Apply movement constraints.
+        if agents[i][0] < x_min:
+            agents[i][0] = x_min
+        if agents[i][1] < y_min:
+            agents[i][1] = y_min
+        if agents[i][0] > x_max:
+            agents[i][0] = x_max
+        if agents[i][1] > y_max:
+            agents[i][1] = y_max
+
+        # Print the maximum distance between all the agents
+        start = time.perf_counter()
+        #print("Maximum distance between all the agents", get_max_distance())
+        #print("Minimum distance between all the agents", get_min_distance())
+        min_distance, max_distance, average = get_min_and_max_distance()
+        print("Maximum distance between all the agents", max_distance)
+        print("Minimum distance between all the agents", min_distance)
+        print("Average distance between all the agents", average)
+        end = time.perf_counter()
+        run_time = end - start
+        print("Time taken to calculate maximum distance", run_time)
+        run_times.append(run_time)
 
 print(agents)
-
+print(n_moves)
 # Plot
 plt.title("Time taken to calculate maximum distance for different numbers of agent")
 plt.xlabel("Number of agents")
