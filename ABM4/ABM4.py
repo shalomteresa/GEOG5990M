@@ -17,7 +17,8 @@ import agentframework as af
 # Set the pseudo-random seed for reproducibility
 random.seed(0)
 
-
+# Initialise paramters
+n_agents = 10
 
 # Variables for constraining movement.
 # The minimum x coordinate.
@@ -30,17 +31,10 @@ x_max = 99
 y_max = 99
 
 # Initialise agents
-a = af.Agent()
-print("type(a)", type(a))
-
-                 
-print(af.Agent())
-
 agents = []
-n_agents = 10
 for i in range(n_agents):
     # Create an agent
-    agents.append(af.Agent())
+    agents.append(af.Agent(i))
     print(agents[i])
 print(agents)
 
@@ -137,31 +131,7 @@ n_iterations = 10
 for n_iterations in range(n_iterations):
     for i in range(n_agents):
         #Change agents(i) coordinates randomly
-        #x-coordinate
-        rn =random.random()
-        #print("rn", rn)
-        if rn < 0.5:
-            agents[i].x = agents[i].x + 1
-        else:
-            agents[i].x = agents[i].x - 0
-        #y-coordinate
-        rn = random.random()
-        #print("rn", rn)
-        if rn < 0.5:
-            agents[i].y = agents[i].y  + 1
-        else:
-            agents[i].y  = agents[i].y  - 1
-            
-         # Apply movement constraints.
-        if agents[i].x < x_min:
-         agents[i].x = x_min
-        if agents[i].y  < y_min:
-         agents[i].y  = y_min
-        if agents[i].x > x_max:
-         agents[i].x = x_max
-        if agents[i].y  > y_max:
-         agents[i].y  = y_max
-         
+        agents[i].move(x_min, y_min, x_max, y_max)
 # Plot
 for i in range(n_agents):
     plt.scatter(agents[i].x, agents[i].y, color='black')
