@@ -14,6 +14,8 @@ import operator
 import time
 import my_modules.agentframework as af
 import my_modules.io as io
+import csv
+
 
 #read the data from txt file
 
@@ -132,7 +134,22 @@ def get_min_and_max_distance():
                 #print("i", i, "j", j)
     return min_distance, max_distance, total_distances / n
 
+def sum_env():
+    sum_env = 0
+    for row in environment:
+        for value in row:
+            sum_env += value
+    #addenv += sum(row)
+    return sum_env
+    
+def sum_store():
+    x = 0
+    for agent in agents:
+        x += agent.store
+    return x
 
+print (sum_env())
+print (sum_store())
 # Move agents
 n_iterations = 100
 for n_iterations in range(n_iterations):
@@ -143,6 +160,10 @@ for n_iterations in range(n_iterations):
 # Plot
 # Plot environment
 
+print (sum_store())
+
+n_cols = io.write_Data(environment)
+       
 plt.imshow(environment)
 # Plot agents
 for i in range(n_agents):
@@ -162,3 +183,4 @@ plt.scatter(sy.x, sy.y, color='green')
 plt.ylim(y_max / 3, y_max * 2 / 3)
 plt.xlim(x_max / 3, x_max * 2 / 3)   
 plt.show()
+

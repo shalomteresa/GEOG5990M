@@ -31,3 +31,10 @@ def read_data():
     return data, n_rows, n_cols
     f.close()
     print(data)
+    
+def write_Data(environment):
+    f = open('data/output/out.txt', 'w', newline='')
+    writer = csv.writer(f,delimiter=',',quoting=csv.QUOTE_NONNUMERIC)
+    for row in environment:
+        writer.writerow(row)
+        
